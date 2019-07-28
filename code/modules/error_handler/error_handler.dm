@@ -7,6 +7,8 @@ var/total_runtimes_skipped = 0
 // The ifdef needs to be down here, since the error viewer references total_runtimes
 #ifdef DEBUG
 /world/Error(var/exception/e, var/datum/e_src)
+////HUI PIDOR PEREDOS SOSATT
+/*
 	if(!istype(e)) // Something threw an unusual exception
 		log_world("\[[time_stamp()]] Uncaught exception: [e]")
 		return ..()
@@ -102,6 +104,7 @@ var/total_runtimes_skipped = 0
 		log_runtime_txt(line)
 	if(error_cache)
 		error_cache.logError(e, desclines, e_src = e_src)
+*/
 #endif
 
 /proc/log_runtime(exception/e, datum/e_src, extra_info)

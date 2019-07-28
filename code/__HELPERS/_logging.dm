@@ -62,27 +62,27 @@
 
 /proc/log_say(text, mob/speaker)
 	if(config.log_say)
-		WRITE_LOG(GLOB.world_game_log, "SAY: [speaker.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "SAY: [speaker.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_whisper(text, mob/speaker)
 	if(config.log_whisper)
-		WRITE_LOG(GLOB.world_game_log, "WHISPER: [speaker.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "WHISPER: [speaker.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_ooc(text, client/user)
 	if(config.log_ooc)
-		WRITE_LOG(GLOB.world_game_log, "OOC: [user.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "OOC: [user.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_aooc(text, client/user)
 	if(config.log_ooc)
-		WRITE_LOG(GLOB.world_game_log, "AOOC: [user.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "AOOC: [user.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_looc(text, client/user)
 	if(config.log_ooc)
-		WRITE_LOG(GLOB.world_game_log, "LOOC: [user.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "LOOC: [user.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_emote(text, mob/speaker)
 	if(config.log_emote)
-		WRITE_LOG(GLOB.world_game_log, "EMOTE: [speaker.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "EMOTE: [speaker.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_attack(attacker, defender, message)
 	if(config.log_attack)
@@ -90,34 +90,34 @@
 
 /proc/log_adminsay(text, mob/speaker)
 	if(config.log_adminchat)
-		WRITE_LOG(GLOB.world_game_log, "ADMINSAY: [speaker.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "ADMINSAY: [speaker.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_qdel(text)
 	WRITE_LOG(GLOB.world_qdel_log, "QDEL: [text]")
 
 /proc/log_mentorsay(text, mob/speaker)
 	if(config.log_adminchat)
-		WRITE_LOG(GLOB.world_game_log, "MENTORSAY: [speaker.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "MENTORSAY: [speaker.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_ghostsay(text, mob/speaker)
 	if(config.log_say)
-		WRITE_LOG(GLOB.world_game_log, "DEADCHAT: [speaker.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "DEADCHAT: [speaker.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_ghostemote(text, mob/speaker)
 	if(config.log_emote)
-		WRITE_LOG(GLOB.world_game_log, "DEADEMOTE: [speaker.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "DEADEMOTE: [speaker.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_adminwarn(text)
 	if(config.log_adminwarn)
-		WRITE_LOG(GLOB.world_game_log, "ADMINWARN: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "ADMINWARN: [rhtml_decode(text)][log_end]")
 
 /proc/log_pda(text, mob/speaker)
 	if(config.log_pda)
-		WRITE_LOG(GLOB.world_game_log, "PDA: [speaker.simple_info_line()]: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "PDA: [speaker.simple_info_line()]: [rhtml_decode(text)][log_end]")
 
 /proc/log_chat(text, mob/speaker)
 	if(config.log_pda)
-		WRITE_LOG(GLOB.world_game_log, "CHAT: [speaker.simple_info_line()] [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "CHAT: [speaker.simple_info_line()] [rhtml_decode(text)][log_end]")
 
 /proc/log_misc(text)
 	WRITE_LOG(GLOB.world_game_log, "MISC: [text][log_end]")
@@ -125,7 +125,7 @@
 /proc/log_world(text)
 	SEND_TEXT(world.log, text)
 	if(config && config.log_world_output)
-		WRITE_LOG(GLOB.world_game_log, "WORLD: [html_decode(text)][log_end]")
+		WRITE_LOG(GLOB.world_game_log, "WORLD: [rhtml_decode(text)][log_end]")
 
 /proc/log_runtime_txt(text) // different from /tg/'s log_runtime because our error handler has a log_runtime proc already that does other stuff
 	WRITE_LOG(GLOB.world_runtime_log, text)
@@ -135,7 +135,7 @@
 	SEND_TEXT(world.log, text)
 
 /proc/log_href(text)
-	WRITE_LOG(GLOB.world_href_log, "HREF: [html_decode(text)]")
+	WRITE_LOG(GLOB.world_href_log, "HREF: [rhtml_decode(text)]")
 
 /proc/log_asset(text)
 	WRITE_LOG(GLOB.world_asset_log, "ASSET: [text]")

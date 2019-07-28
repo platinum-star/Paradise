@@ -4,10 +4,10 @@
 			spawn(0)
 				if(lesser_sanitize == 7355608) // Super random number because this could be bad if done accidentally
 					// Runs sanitization but allows <> and // (Needed for discord)
-					ext_python("ircbot_message.py", "[config.comms_password] [IP] [channel] [not_as_paranoid_sanitize(msg)]")
+					ext_python("ircbot_message.py", "[config.comms_password] [IP] [channel] [not_as_paranoid_sanitize_russian(msg)]")
 				else
 					// I have no means of trusting you, cmd
-					ext_python("ircbot_message.py", "[config.comms_password] [IP] [channel] [paranoid_sanitize(msg)]")
+					ext_python("ircbot_message.py", "[config.comms_password] [IP] [channel] [paranoid_sanitize_russian(msg)]")
 	return
 
 /proc/send2mainirc(var/msg, var/lesser_sanitize = FALSE)

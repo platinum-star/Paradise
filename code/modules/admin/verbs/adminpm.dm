@@ -106,7 +106,7 @@
 
 	//clean the message if it's not sent by a high-rank admin
 	if(!check_rights(R_SERVER|R_DEBUG,0))
-		msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
+		msg = sanitize_russian(copytext(msg,1,MAX_MESSAGE_LEN))
 		if(!msg)
 			return
 
@@ -187,7 +187,7 @@
 				else
 					if(check_rights(R_ADMIN|R_MOD, 0, X.mob))
 						to_chat(X, "<span class='boldnotice'>[type]: [key_name(src, TRUE, type)]-&gt;[key_name(C, TRUE, type)]: [emoji_msg]</span>")
-	
+
 	//Check if the mob being PM'd has any open admin tickets.
 	var/tickets = list()
 	if(type == "Mentorhelp")
@@ -201,10 +201,10 @@
 	if(type == "Mentorhelp")
 		if(check_rights(R_ADMIN|R_MOD|R_MENTOR, 0, C.mob)) //Is the person being pm'd an admin? If so we check if the pm'er has open tickets
 			tickets = SSmentor_tickets.checkForTicket(src)
-	else // Ahelp 
+	else // Ahelp
 		if(check_rights(R_ADMIN|R_MOD, 0, C.mob)) //Is the person being pm'd an admin? If so we check if the pm'er has open tickets
 			tickets = SStickets.checkForTicket(src)
-	
+
 	if(tickets)
 		for(var/datum/ticket/i in tickets)
 			i.addResponse(src, msg)
@@ -221,14 +221,14 @@
 	if(!msg)
 		return
 
-	sanitize(msg)
+	sanitize_russian(msg)
 
 	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
 		to_chat(src, "<span class='warning'>Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting</span>")
 		to_chat(src, "<span class='notice'>[msg]</span>")
 		return
 
-	send2adminirc("PlayerPM from [key_name(src)]: [html_decode(msg)]")
+	send2adminirc("PlayerPM from [key_name(src)]: [rhtml_decode(msg)]")
 
 	to_chat(src, "<font color='blue'>IRC PM to-<b>IRC-Admins</b>: [msg]</font>")
 

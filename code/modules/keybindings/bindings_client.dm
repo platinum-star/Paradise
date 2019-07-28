@@ -22,11 +22,8 @@
 		if("F2") // Screenshot. Hold shift to choose a name and location to save in
 			ooc()
 			return
-		if("F3")
-			mob.say_wrapper()
-			return
 		if("F4")
-			mob.me_wrapper()
+			mob.me_verb()
 			return
 		if("F12") // Toggles minimal HUD
 			mob.button_pressed_F12()

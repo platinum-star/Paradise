@@ -36,10 +36,10 @@
 
 	if(scanner.occupant && can_autoprocess())
 		scan_mob(scanner.occupant)
-	
+
 	if(!LAZYLEN(records))
 		return
-	
+
 	for(var/obj/machinery/clonepod/pod in pods)
 		if(!(pod.occupant || pod.mess) && (pod.efficiency > 5))
 			for(var/datum/dna2/record/R in records)
@@ -133,7 +133,7 @@
 /obj/machinery/computer/cloning/ui_data(mob/user, ui_key = "main", datum/topic_state/state = default_state)
 	var/data[0]
 	data["menu"] = src.menu
-	data["scanner"] = sanitize("[src.scanner]")
+	data["scanner"] = sanitize_russian("[src.scanner]")
 
 	var/canpodautoprocess = 0
 	if(pods.len)
@@ -144,7 +144,7 @@
 			if(pod.efficiency > 5)
 				canpodautoprocess = 1
 
-			tempods.Add(list(list("pod" = "\ref[pod]", "name" = sanitize(capitalize(pod.name)), "biomass" = pod.biomass)))
+			tempods.Add(list(list("pod" = "\ref[pod]", "name" = sanitize_russian(capitalize(pod.name)), "biomass" = pod.biomass)))
 			data["pods"] = tempods
 
 	data["loading"] = loading
@@ -166,7 +166,7 @@
 	var/list/temprecords[0]
 	for(var/datum/dna2/record/R in records)
 		var tempRealName = R.dna.real_name
-		temprecords.Add(list(list("record" = "\ref[R]", "realname" = sanitize(tempRealName))))
+		temprecords.Add(list(list("record" = "\ref[R]", "realname" = sanitize_russian(tempRealName))))
 	data["records"] = temprecords
 
 	if(src.menu == 3)
@@ -178,7 +178,7 @@
 
 			if((H) && (istype(H)))
 				data["health"] = H.sensehealth()
-			data["realname"] = sanitize(src.active_record.dna.real_name)
+			data["realname"] = sanitize_russian(src.active_record.dna.real_name)
 			data["unidentity"] = src.active_record.dna.uni_identity
 			data["strucenzymes"] = src.active_record.dna.struc_enzymes
 		if(selected_pod && (selected_pod in pods) && selected_pod.biomass >= CLONE_BIOMASS)

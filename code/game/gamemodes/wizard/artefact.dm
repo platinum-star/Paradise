@@ -87,7 +87,7 @@
 				var/wizard_name_first = pick(GLOB.wizard_first)
 				var/wizard_name_second = pick(GLOB.wizard_second)
 				var/randomname = "[wizard_name_first] [wizard_name_second]"
-				var/newname = sanitize(copytext(input(M, "You are the wizard's apprentice. Would you like to change your name to something else?", "Name change", randomname) as null|text,1,MAX_NAME_LEN))
+				var/newname = sanitize_russian(copytext(input(M, "You are the wizard's apprentice. Would you like to change your name to something else?", "Name change", randomname) as null|text,1,MAX_NAME_LEN))
 
 				if(!newname)
 					newname = randomname
@@ -637,7 +637,7 @@ var/global/list/multiverse = list()
 	if(M.stat != DEAD)
 		to_chat(user, "<span class='warning'>This artifact can only affect the dead!</span>")
 		return
-		
+
 	if((!M.mind || !M.client) && !M.grab_ghost())
 		to_chat(user,"<span class='warning'>There is no soul connected to this body...</span>")
 		return
@@ -825,7 +825,7 @@ var/global/list/multiverse = list()
 	if(target && cooldown < world.time)
 		switch(user.zone_sel.selecting)
 			if("mouth")
-				var/wgw =  sanitize(input(user, "What would you like the victim to say", "Voodoo", null)  as text)
+				var/wgw =  sanitize_russian(input(user, "What would you like the victim to say", "Voodoo", null)  as text)
 				target.say(wgw)
 				log_game("[user][user.key] made [target][target.key] say [wgw] with a voodoo doll.")
 			if("eyes")

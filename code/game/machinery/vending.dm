@@ -452,7 +452,7 @@
 	var/list/data = list()
 	if(currently_vending)
 		data["mode"] = 1
-		data["product"] = sanitize(currently_vending.product_name)
+		data["product"] = sanitize_russian(currently_vending.product_name)
 		data["price"] = currently_vending.price
 		data["message_err"] = 0
 		data["message"] = src.status_message
@@ -469,7 +469,7 @@
 
 			listed_products.Add(list(list(
 				"key" = key,
-				"name" = sanitize(I.product_name),
+				"name" = sanitize_russian(I.product_name),
 				"price" = I.price,
 				"color" = I.display_color,
 				"amount" = I.amount)))

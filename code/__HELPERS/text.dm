@@ -56,36 +56,36 @@
 	return t
 
 //Runs byond's sanitization proc along-side sanitize_simple
-/proc/sanitize(var/t,var/list/repl_chars = null)
-	return html_encode(sanitize_simple(t,repl_chars))
+//proc/sanitize_russian(var/t,var/list/repl_chars = null)
+//	return rhtml_encode(sanitize_simple(t,repl_chars))
 
 // Gut ANYTHING that isnt alphanumeric, or brackets
-/proc/paranoid_sanitize(t)
+/proc/paranoid_sanitize_russian(t)
 	var/regex/alphanum_only = regex("\[^a-zA-Z0-9# ,.?!:;()]", "g")
 	return alphanum_only.Replace(t, "#")
 
 // Less agressive, to allow discord features, such as <>, / and @
-/proc/not_as_paranoid_sanitize(t)
+/proc/not_as_paranoid_sanitize_russian(t)
 	var/regex/alphanum_slashes_only = regex("\[^a-zA-Z0-9# ,.?!:;()/<>@]", "g")
 	return alphanum_slashes_only.Replace(t, "#")
 
 //Runs sanitize and strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
+//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize_russian() calls byond's rhtml_encode()
 /proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((sanitize(strip_html_simple(t))),1,limit)
+	return copytext((sanitize_russian(strip_html_simple(t))),1,limit)
 
 // Used to get a properly sanitized multiline input, of max_length
 /proc/stripped_multiline_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
 	var/name = input(user, message, title, default) as message|null
 	if(no_trim)
-		return copytext(html_encode(name), 1, max_length)
+		return copytext(rhtml_encode(name), 1, max_length)
 	else
-		return trim(html_encode(name), max_length)
+		return trim(rhtml_encode(name), max_length)
 
 //Runs byond's sanitization proc along-side strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
+//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that rhtml_encode() would cause
 /proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((html_encode(strip_html_simple(t))),1,limit)
+	return copytext((rhtml_encode(strip_html_simple(t))),1,limit)
 
 
 //Returns null if there is any bad text in the string
@@ -105,9 +105,9 @@
 /proc/stripped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
 	var/name = input(user, message, title, default) as text|null
 	if(no_trim)
-		return copytext(html_encode(name), 1, max_length)
+		return copytext(rhtml_encode(name), 1, max_length)
 	else
-		return trim(html_encode(name), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
+		return trim(rhtml_encode(name), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
 
 // Uses client.typing to check if the popup should appear or not
 /proc/typing_input(mob/user, message = "", title = "", default = "")
@@ -385,7 +385,7 @@ proc/checkhtml(var/t)
 			break
 	if(max_length)
 		input = copytext(input,1,max_length)
-	return sanitize(input, allow_lines ? list("\t" = " ") : list("\n" = " ", "\t" = " "))
+	return sanitize_russian(input, allow_lines ? list("\t" = " ") : list("\n" = " ", "\t" = " "))
 
 /proc/trim_strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN, allow_lines = 0)
     return trim(strip_html_properly(input, max_length, allow_lines))
@@ -397,20 +397,20 @@ proc/checkhtml(var/t)
 		if(!lentext(string))
 			return "\[...\]"
 		else
-			return html_encode(string) //NO DECODED HTML YOU CHUCKLEFUCKS
+			return rhtml_encode(string) //NO DECODED HTML YOU CHUCKLEFUCKS
 	else
 		return "[copytext_preserve_html(string, 1, 37)]..."
 
 //alternative copytext() for encoded text, doesn't break html entities (&#34; and other)
 /proc/copytext_preserve_html(var/text, var/first, var/last)
-	return html_encode(copytext(html_decode(text), first, last))
+	return rhtml_encode(copytext(rhtml_decode(text), first, last))
 
-//Run sanitize(), but remove <, >, " first to prevent displaying them as &gt; &lt; &34; in some places, after html_encode().
+//Run sanitize_russian(), but remove <, >, " first to prevent displaying them as &gt; &lt; &34; in some places, after rhtml_encode().
 //Best used for sanitize object names, window titles.
-//If you have a problem with sanitize() in chat, when quotes and >, < are displayed as html entites -
-//this is a problem of double-encode(when & becomes &amp;), use sanitize() with encode=0, but not the sanitizeSafe()!
+//If you have a problem with sanitize_russian() in chat, when quotes and >, < are displayed as html entites -
+//this is a problem of double-encode(when & becomes &amp;), use sanitize_russian() with encode=0, but not the sanitizeSafe()!
 /proc/sanitizeSafe(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
-	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'")), max_length, encode, trim, extra)
+	return sanitize_russian(replace_characters(input, list(">"=" ","<"=" ", "\""="'")), max_length, encode, trim, extra)
 
 
 //Replace BYOND text macros with span classes for to_chat
@@ -534,7 +534,7 @@ proc/checkhtml(var/t)
 				text = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[text]</font>"
 			else
 				text = "<font face=\"[deffont]\">[text]</font>"
-    
+
 	text = copytext(text, 1, MAX_PAPER_MESSAGE_LEN)
 	return text
 

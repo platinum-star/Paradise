@@ -763,7 +763,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				var/list/materials_list = list()
 				design_list["materials"] = materials_list
 				design_list["id"] = D.id
-				design_list["name"] = sanitize(D.name)
+				design_list["name"] = sanitize_russian(D.name)
 				var/c = 50
 				for(var/M in D.materials)
 					var/list/material_list = list()
@@ -832,7 +832,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				var/list/materials_list = list()
 				design_list["materials"] = materials_list
 				design_list["id"] = D.id
-				design_list["name"] = sanitize(D.name)
+				design_list["name"] = sanitize_russian(D.name)
 				var/check_materials = 1
 				for(var/M in D.materials)
 					var/list/material_list = list()

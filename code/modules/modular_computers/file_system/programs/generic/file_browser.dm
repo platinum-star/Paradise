@@ -155,7 +155,7 @@
 			if(F.do_not_edit && (alert("WARNING: This file is not compatible with editor. Editing it may result in permanently corrupted formatting or damaged data consistency. Edit anyway?", "Incompatible File", "No", "Yes") == "No"))
 				return 1
 			// 16384 is the limit for file length in characters. Currently, papers have value of 2048 so this is 8 times as long, since we can't edit parts of the file independently.
-			var/newtext = stripped_multiline_input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", html_decode(F.stored_data), 16384, TRUE)
+			var/newtext = stripped_multiline_input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", rhtml_decode(F.stored_data), 16384, TRUE)
 			if(!newtext)
 				return
 			if(F)
@@ -212,7 +212,7 @@
 				return 1
 			if(F.password)
 				return
-			var/new_password = sanitize(input(usr, "Enter an encryption key:", "Encrypt File"))
+			var/new_password = sanitize_russian(input(usr, "Enter an encryption key:", "Encrypt File"))
 			if(!new_password)
 				to_chat(usr, "<span class='warning'>File not encrypted.</span>")
 				return
